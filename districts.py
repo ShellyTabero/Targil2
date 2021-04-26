@@ -1,5 +1,9 @@
 from data import Data
 
+MINIMUM_TO_BE_GREEN = 340
+GOOD_DAY = 1
+BAD_DAY = 0
+
 class Districts:
 
     def __init__(self, dataset):
@@ -31,22 +35,22 @@ class Districts:
         resigned_healed = self.dataset.get_data()["resigned_healed"]
         for new_positive_i, resigned_healed_i in zip(new_positives, resigned_healed):
             if resigned_healed_i - new_positive_i > 0:
-                day_type_values.append(1)
+                day_type_values.append(GOOD_DAY)
             else:
-                day_type_values.append(0)
+                day_type_values.append(BAD_DAY)
         self.dataset.add_category("day_type", day_type_values)
 
     def get_districts_class(self):
         dictionary = {}
         day_type_lst = self.dataset.get_data()["day_type"]
-        new_positives_lst = self.dataset.get_data()["new_positives"]
+        district_lst = self.dataset.get_data()["denominazione_region"]
 
         for region in self.dataset.get_all_districts():
             count = 0
-            for day_type, district in zip(day_type_lst, new_positives_lst):
+            for day_type, district in zip(day_type_lst, district_lst):
                 if region == district:
                     count += day_type
-            if count > 340:
+            if count > MINIMUM_TO_BE_GREEN:
                 dictionary[region] = "green"
             else:
                 dictionary[region] = "not green"
