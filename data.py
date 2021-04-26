@@ -1,5 +1,6 @@
 import pandas
 
+
 class Data:
 
     def __init__(self, path):

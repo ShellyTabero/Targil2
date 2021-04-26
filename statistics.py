@@ -1,5 +1,6 @@
 import math
 
+
 def mean(values):
     """
     Calculates the mean of all the values in  a list.

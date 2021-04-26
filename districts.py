@@ -1,8 +1,7 @@
-from data import Data
-
 MINIMUM_TO_BE_GREEN = 340
 GOOD_DAY = 1
 BAD_DAY = 0
+
 
 class Districts:
 
