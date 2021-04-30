@@ -9,6 +9,11 @@ class Districts:
         self.dataset = dataset
 
     def filter_districts(self, letters):
+        """
+        Updates the dataset so it will contain only the district's names that starts with letters in the given set
+        :param letters: A set of letters
+        :returns: None
+        """
         districts_lst = self.dataset.get_all_districts()
         new_lst = []
 
@@ -19,7 +24,12 @@ class Districts:
         self.dataset.set_districts_data(new_lst)
 
     def print_details(self, features, statistic_functions):
-
+        """
+        Prints statistic data on the dataset according to the given features and statistic functions
+        :param features: A list of features
+        :param statistic_functions: A list of statistic functions
+        :returns: None
+        """
         for category in features:
             results = []
             print(category, end=": ")
@@ -29,6 +39,11 @@ class Districts:
             print(", ".join(results))
 
     def determine_day_type(self):
+        """
+        Adds a key to the dictionary that contains whether it's a good or a bad day
+        :param: None
+        :returns: None
+        """
         day_type_values = []
         new_positives = self.dataset.get_data()["new_positives"]
         resigned_healed = self.dataset.get_data()["resigned_healed"]
@@ -40,6 +55,11 @@ class Districts:
         self.dataset.add_category("day_type", day_type_values)
 
     def get_districts_class(self):
+        """
+        determines whether a district in the dataset is green or not green
+        :param: None
+        :returns: A dictionary of the dataset with a new key containing whether a district  is green or not
+        """
         dictionary = {}
         day_type_lst = self.dataset.get_data()["day_type"]
         district_lst = self.dataset.get_data()["denominazione_region"]
